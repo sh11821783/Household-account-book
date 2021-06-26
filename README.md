@@ -1,24 +1,10 @@
-# README
+# 家計簿アプリ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+このアプリは、様々な家庭内の収支を特に使用方法を聞かずに、感覚的に特にPC知識などない方でも、『見やすさ』『使いやすさ』アプリを目指したアプリです。
 
-Things you may want to cover:
+## 開発環境
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* AWS Cloud9
+* Ruby
+* Rails
+* Git(HTTPSからSSH通信へ変更)
