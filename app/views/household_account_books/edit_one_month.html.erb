@@ -1,0 +1,70 @@
+<% provide(:title, @user.name) %>
+<%= form_with(model: @user, url: household_account_books_update_one_month_user_path(date: @first_day), local: true, method: :patch) do |f| %>
+<div>
+  <h1>家計簿記載画面【固定費】</h1>
+  
+  <table class="table table-bordered table-condensed table-hover" id="table-attendances">
+    <% n = 0 %>
+    <% @household_account_books.each do |day| %>
+      <%= f.fields_for "household_account_books[]", day do |h| %>
+        <% if n == 0 %>
+          <thead>
+            <tr>
+              <th>日付</th>
+              <th>曜日</th>
+              <th><%= h.select :fixed_cost, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他'] ], { include_blank: true, selected: @household_accounnt_book.fixed_cost }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :fixed_cost_1, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他']  ], { include_blank: true, selected: @household_accounnt_book.fixed_cost_1 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :fixed_cost_2, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他']  ], { include_blank: true, selected: @household_accounnt_book.fixed_cost_2 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :fixed_cost_3, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他']  ], { include_blank: true, selected: @household_accounnt_book.fixed_cost_3 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :fixed_cost_4, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他']  ], { include_blank: true, selected: @household_accounnt_book.fixed_cost_4 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :fixed_cost_5, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他']  ], { include_blank: true, selected: @household_accounnt_book.fixed_cost_5 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :fixed_cost_6, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他']  ], { include_blank: true, selected: @household_accounnt_book.fixed_cost_6 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :fixed_cost_7, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他']  ], { include_blank: true, selected: @household_accounnt_book.fixed_cost_7 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :fixed_cost_8, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他']  ], { include_blank: true, selected: @household_accounnt_book.fixed_cost_8 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :fixed_cost_9, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他']  ], { include_blank: true, selected: @household_accounnt_book.fixed_cost_9 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :fixed_cost_10, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他']  ], { include_blank: true, selected: @household_accounnt_book.fixed_cost_10 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :fixed_cost_11, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他']  ], { include_blank: true, selected: @household_accounnt_book.fixed_cost_11 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :fixed_cost_12, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他']  ], { include_blank: true, selected: @household_accounnt_book.fixed_cost_12 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :fixed_cost_13, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他']  ], { include_blank: true, selected: @household_accounnt_book.fixed_cost_13 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :fixed_cost_14, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他']  ], { include_blank: true, selected: @household_accounnt_book.fixed_cost_14 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :fixed_cost_15, [['家賃'], ['電気代'], ['水道代'], ['ガス代'], ['インターネット料金'], ['携帯料金'], ['NHK料金'], ['保険料'], ['年金'], ['国民保険'], ['ローン'], ['習い事'], ['月極駐車場'], ['貯金'], ['お小遣い'], ['教育費'], ['その他']  ], { include_blank: true, selected: @household_accounnt_book.fixed_cost_15 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th>備考</th>
+            </tr>
+          </thead>
+          <% n = 1 %>
+        <% end %>
+      
+      
+        <tbody>
+          <tr>
+            <td><%= l(day.worked_on, format: :short) %></td>
+            <td><%= $days_of_the_week[day.worked_on.wday] %></td>
+            <td><%= h.number_field :fixed_n, class: "form-control" %></td>
+            <td><%= h.number_field :fixed_n_1, class: "form-control" %></td>
+            <td><%= h.number_field :fixed_n_2, class: "form-control" %></td>
+            <td><%= h.number_field :fixed_n_3, class: "form-control" %></td>
+            <td><%= h.number_field :fixed_n_4, class: "form-control" %></td>
+            <td><%= h.number_field :fixed_n_5, class: "form-control" %></td>
+            <td><%= h.number_field :fixed_n_6, class: "form-control" %></td>
+            <td><%= h.number_field :fixed_n_7, class: "form-control" %></td>
+            <td><%= h.number_field :fixed_n_8, class: "form-control" %></td>
+            <td><%= h.number_field :fixed_n_9, class: "form-control" %></td>
+            <td><%= h.number_field :fixed_n_10, class: "form-control" %></td>
+            <td><%= h.number_field :fixed_n_11, class: "form-control" %></td>
+            <td><%= h.number_field :fixed_n_12, class: "form-control" %></td>
+            <td><%= h.number_field :fixed_n_13, class: "form-control" %></td>
+            <td><%= h.number_field :fixed_n_14, class: "form-control" %></td>
+            <td><%= h.number_field :fixed_n_15, class: "form-control" %></td>
+            <td><%= h.text_field :note %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    <% end %>
+  </table>
+</div>
+
+<div class="center">
+    <%= f.submit "まとめて更新", class: "btn btn-lg btn-primary" %>
+    <%= link_to "キャンセル", user_path(date: @first_day), class: "btn btn-lg btn-default" %>
+  </div>
+<% end %>

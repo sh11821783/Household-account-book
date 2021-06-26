@@ -1,0 +1,366 @@
+<% provide(:title, @user.name) %>
+<div>
+  <table class="table table-bordered table-condensed user-table">
+    <tr>
+      <td>名前：<%= @user.name %></td>
+    </tr>
+  </table>
+</div>
+
+<h1>【変動費一覧表】</h1>
+
+<div>
+  <table class="table table-bordered table-condensed" id="table-attendances">
+    <tr>
+      <td>
+        <%= l(Date.today, format: :long) %>
+      </td>
+    </tr>
+  <table>
+</div>
+
+<div>
+  <% @household_account_books.each do |h| %>
+    <% @all_total_income = @all_total_income.to_i + h.income_n.to_i + h.income_n_1.to_i + h.income_n_2.to_i + h.income_n_3.to_i +  h.income_n_4.to_i + h.income_n_5.to_i
+      + h.income_n_6.to_i + h.income_n_7.to_i + h.income_n_8.to_i + h.income_n_9.to_i + h.income_n_10.to_i %>
+
+    <% @all_total_cost = @all_total_cost.to_i + h.fixed_n.to_i + h.fixed_n_1.to_i +  h.fixed_n_2.to_i +  h.fixed_n_3.to_i +  h.fixed_n_4.to_i +  h.fixed_n_5.to_i + 
+                           h.fixed_n_6.to_i +  h.fixed_n_7.to_i +  h.fixed_n_8.to_i +  h.fixed_n_9.to_i +  h.fixed_n_10.to_i +  h.fixed_n_11.to_i + 
+                           h.fixed_n_12.to_i +  h.fixed_n_13.to_i +  h.fixed_n_14.to_i +  h.fixed_n_15.to_i %>
+
+    <% @all_total_cost_1 = @all_total_cost_1.to_i + h.variable_n.to_i + h.variable_n_1.to_i + h.variable_n_2.to_i + h.variable_n_3.to_i +  h.variable_n_4.to_i + h.variable_n_5.to_i
+      + h.variable_n_6.to_i + h.variable_n_7.to_i + h.variable_n_8.to_i + h.variable_n_9.to_i + h.income_n_10.to_i %>
+  <% end %>
+  <table class="table table-bordered table-condensed" id="table-attendances">
+    <tr>
+      <th>収入</th>
+      <th>支出（固定費 + 変動費）</th>
+      <th>収支合計</th>
+    </tr>
+    <tr>
+      <td><%= "#{@all_total_income.to_s(:delimited)}円" %></td>
+      <td><%= "#{(@all_total_cost + @all_total_cost_1).to_s(:delimited)}円" "（#{@all_total_cost.to_s(:delimited)}円 + #{@all_total_cost_1.to_s(:delimited)}円）" %></td>
+      <td><%= "#{(@all_total_income.to_i - (@all_total_cost + @all_total_cost_1).to_i).to_s(:delimited)}円" %></td>
+    </tr>
+  <table>
+</div>
+
+<div class="center">
+  <%= form_with(url: user_path(@user), method: :get, local: true) do |f| %>
+    <%= f.date_select :select_year, {:discard_day => true, :discard_month => true, :use_month_numbers => true}, class: "form-control bootstrap-date" %>
+    <%= f.date_select :select_month, {:discard_day => true, :discard_year => true, :use_month_numbers => true}, class: "form-control bootstrap-date" %>
+    <button class="btn btn-primary"> 検索 </button><br><br>
+  <% end %>
+</div>
+
+<div class="center">
+  <%= link_to "⇦ 前月へ", show_1_user_path(date: @first_day.prev_month), class: "btn btn-info" %>
+  <%= link_to "1ヶ月の家計簿編集へ", household_account_books_edit_one_month_1_user_path(date: @first_day), class: "btn btn-success" %>
+  <%= link_to "次月へ ⇨", show_1_user_path(date: @first_day.next_month), class: "btn btn-info" %>
+</div>
+
+<div>
+  <table class="table table-bordered table-condensed table-hover" id="table-attendances">
+    <thead>
+      <br><td colspan = "19"><%= l(@household_account_book.worked_on, format: :year) %></td>
+      <tr>
+        <th>日付</th>
+        <th>曜日</th>
+        <% if @household_account_book.variable_cost.present? %>
+          <th><%= @household_account_book.variable_cost %></th>
+        <% end %>
+        <% if @household_account_book.variable_cost_1.present? %>
+          <th><%= @household_account_book.variable_cost_1 %></th>
+        <% end %>
+        <% if @household_account_book.variable_cost_2.present? %>
+          <th><%= @household_account_book.variable_cost_2 %></th>
+        <% end %>
+        <% if @household_account_book.variable_cost_3.present? %>
+          <th><%= @household_account_book.variable_cost_3 %></th>
+        <% end %>
+        <% if @household_account_book.variable_cost_4.present? %>
+          <th><%= @household_account_book.variable_cost_4 %></th>
+        <% end %>
+        <% if @household_account_book.variable_cost_5.present? %>
+          <th><%= @household_account_book.variable_cost_5 %></th>
+        <% end %>
+        <% if @household_account_book.variable_cost_6.present? %>
+          <th><%= @household_account_book.variable_cost_6 %></th>
+        <% end %>
+        <% if @household_account_book.variable_cost_7.present? %>
+          <th><%= @household_account_book.variable_cost_7 %></th>
+        <% end %>
+        <% if @household_account_book.variable_cost_8.present? %>
+          <th><%= @household_account_book.variable_cost_8 %></th>
+        <% end %>
+        <% if @household_account_book.variable_cost_9.present? %>
+          <th><%= @household_account_book.variable_cost_9 %></th>
+        <% end %>
+        <% if @household_account_book.variable_cost_10.present? %>
+          <th><%= @household_account_book.variable_cost_10 %></th>
+        <% end %>
+        <% if @household_account_book.variable_cost_11.present? %>
+          <th><%= @household_account_book.variable_cost_11 %></th>
+        <% end %>
+        <% if @household_account_book.variable_cost_12.present? %>
+          <th><%= @household_account_book.variable_cost_12 %></th>
+        <% end %>
+        <% if @household_account_book.variable_cost_13.present? %>
+          <th><%= @household_account_book.variable_cost_13 %></th>
+        <% end %>
+        <% if @household_account_book.variable_cost_14.present? %>
+          <th><%= @household_account_book.variable_cost_14 %></th>
+        <% end %>
+        <th>備考</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!--この@household_account_booksは、application.html.erbのset_one_monthに定義されている-->
+      <% @household_account_books.each do |household_account_book| %>
+        <tr>
+          <td><%= l(household_account_book.worked_on, format: :short) %></td>
+          <td><%= $days_of_the_week[household_account_book.worked_on.wday] %></td>
+          <% if @household_account_book.variable_cost.present? %>
+            <td><%= household_account_book.variable_n %></td>
+            <!--１回目の”each”で『@total_cost.to_i（0）+ household_account_book.variable_n.to_i（1000円）』が入るとすると
+                ２回目の”each”では『@total_cost.to_i（1000円）+ household_account_book.variable_n.to_i（1000円）』になるようにする。-->
+            <% @total_cost = @total_cost.to_i  + household_account_book.variable_n.to_i %>
+          <% end %>
+          <% if @household_account_book.variable_cost_1.present? %>
+            <td><%= household_account_book.variable_n_1 %></td>
+            <% @total_cost_1 = @total_cost_1.to_i  + household_account_book.variable_n_1.to_i %>
+          <% end %>
+          <% if @household_account_book.variable_cost_2.present? %>
+            <td><%= household_account_book.variable_n_2 %></td>
+            <% @total_cost_2 = @total_cost_2.to_i  + household_account_book.variable_n_2.to_i %>
+          <% end %>
+          <% if @household_account_book.variable_cost_3.present? %>
+            <td><%= household_account_book.variable_n_3 %></td>
+            <% @total_cost_3 = @total_cost_3.to_i  + household_account_book.variable_n_3.to_i %>
+          <% end %>
+          <% if @household_account_book.variable_cost_4.present? %>
+            <td><%= household_account_book.variable_n_4 %></td>
+            <% @total_cost_4 = @total_cost_4.to_i  + household_account_book.variable_n_4.to_i %>
+          <% end %>
+          <% if @household_account_book.variable_cost_5.present? %>
+            <td><%= household_account_book.variable_n_5 %></td>
+            <% @total_cost_5 = @total_cost_5.to_i  + household_account_book.variable_n_5.to_i %>
+          <% end %>
+          <% if @household_account_book.variable_cost_6.present? %>
+            <td><%= household_account_book.variable_n_6 %></td>
+            <% @total_cost_6 = @total_cost_6.to_i  + household_account_book.variable_n_6.to_i %>
+          <% end %>
+          <% if @household_account_book.variable_cost_7.present? %>
+            <td><%= household_account_book.variable_n_7 %></td>
+            <% @total_cost_7 = @total_cost_7.to_i  + household_account_book.variable_n_7.to_i %>
+          <% end %>
+          <% if @household_account_book.variable_cost_8.present? %>
+            <td><%= household_account_book.variable_n_8 %></td>
+            <% @total_cost_8 = @total_cost_8.to_i  + household_account_book.variable_n_8.to_i %>
+          <% end %>
+          <% if @household_account_book.variable_cost_9.present? %>
+            <td><%= household_account_book.variable_n_9 %></td>
+            <% @total_cost_9 = @total_cost_9.to_i  + household_account_book.variable_n_9.to_i %>
+          <% end %>
+          <% if @household_account_book.variable_cost_10.present? %>
+            <td><%= household_account_book.variable_n_10 %></td>
+            <% @total_cost_10 = @total_cost_10.to_i  + household_account_book.variable_n_10.to_i %>
+          <% end %>
+          <% if @household_account_book.variable_cost_11.present? %>
+            <td><%= household_account_book.variable_n_11 %></td>
+            <% @total_cost_11 = @total_cost_11.to_i  + household_account_book.variable_n_11.to_i %>
+          <% end %>
+          <% if @household_account_book.variable_cost_12.present? %>
+            <td><%= household_account_book.variable_n_12 %></td>
+            <% @total_cost_12 = @total_cost_12.to_i  + household_account_book.variable_n_12.to_i %>
+          <% end %>
+          <% if @household_account_book.variable_cost_13.present? %>
+            <td><%= household_account_book.variable_n_13 %></td>
+            <% @total_cost_13 = @total_cost_13.to_i  + household_account_book.variable_n_13.to_i %>
+          <% end %>
+          <% if @household_account_book.variable_cost_14.present? %>
+            <td><%= household_account_book.variable_n_14 %></td>
+            <% @total_cost_14 = @total_cost_14.to_i  + household_account_book.variable_n_14.to_i %>
+          <% end %>
+          <% if @household_account_book.variable_cost_15.present? %>
+            <td><%= household_account_book.variable_n_15 %></td>
+            <% @total_cost_15 = @total_cost_15.to_i  + household_account_book.variable_n_15.to_i %>
+          <% end %>
+          <td><%= household_account_book.variable_note %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div>
+  <table class="table table-bordered table-condensed table-hover" id="table-attendances">
+    <tfoot>
+    <tr>
+      <% if @household_account_book.variable_cost.present? %>
+        <td></td>
+      <% end %>
+      <% if @household_account_book.variable_cost.present? %>
+        <td><%= @household_account_book.variable_cost %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_1.present? %>
+        <td><%= @household_account_book.variable_cost_1 %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_2.present? %>
+        <td><%= @household_account_book.variable_cost_2 %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_3.present? %>
+        <td><%= @household_account_book.variable_cost_3 %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_4.present? %>
+        <td><%= @household_account_book.variable_cost_4 %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_5.present? %>
+        <td><%= @household_account_book.variable_cost_5 %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_6.present? %>
+        <td><%= @household_account_book.variable_cost_6 %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_7.present? %>
+        <td><%= @household_account_book.variable_cost_7 %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_8.present? %>
+        <td><%= @household_account_book.variable_cost_8 %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_9.present? %>
+        <td><%= @household_account_book.variable_cost_9 %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_10.present? %>
+        <td><%= @household_account_book.variable_cost_10 %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_11.present? %>
+        <td><%= @household_account_book.variable_cost_11 %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_12.present? %>
+        <td><%= @household_account_book.variable_cost_12 %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_13.present? %>
+        <td><%= @household_account_book.variable_cost_13 %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_14.present? %>
+        <td><%= @household_account_book.variable_cost_14 %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_15.present? %>
+        <td><%= @household_account_book.variable_cost_15 %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td><%= "各支出（変動）" %></td>
+      <% if @household_account_book.variable_cost.present? %>
+        <td><%= "#{@total_cost.to_s(:delimited)}円" %></td>
+      <% elsif @household_account_book.variable_cost.blank? %>
+        <td><%= "#{@total_cost.to_i}円" %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_1.present? %>
+        <td><%= "#{@total_cost_1.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_2.present? %>
+        <td><%= "#{@total_cost_2.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_3.present? %>
+        <td><%= "#{@total_cost_3.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_4.present? %>
+        <td><%= "#{@total_cost_4.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_5.present? %>
+        <td><%= "#{@total_cost_5.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_6.present? %>
+        <td><%= "#{@total_cost_6.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_7.present? %>
+        <td><%= "#{@total_cost_7.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_8.present? %>
+        <td><%= "#{@total_cost_8.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_9.present? %>
+        <td><%= "#{@total_cost_9.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_10.present? %>
+        <td><%= "#{@total_cost_10.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_11.present? %>
+        <td><%= "#{@total_cost_11.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_12.present? %>
+        <td><%= "#{@total_cost_12.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_13.present? %>
+        <td><%= "#{@total_cost_13.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_14.present? %>
+        <td><%= "#{@total_cost_14.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.variable_cost_15.present? %>
+        <td><%= "#{@total_cost_15.to_s(:delimited)}円" %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td><%= "支出合計（変動）" %></td>
+      <% @all_total_cost = @total_cost.to_i + @total_cost_1.to_i + @total_cost_2.to_i + @total_cost_3.to_i + @total_cost_4.to_i + @total_cost_5.to_i + 
+                          @total_cost_6.to_i + @total_cost_7.to_i + @total_cost_8.to_i + @total_cost_9.to_i + @total_cost_10.to_i + @total_cost_11.to_i + 
+                          @total_cost_12.to_i + @total_cost_13.to_i + @total_cost_14.to_i + @total_cost_15.to_i %>
+      <td><%= "#{@all_total_cost.to_s(:delimited)}円" %></td>
+    </tr>
+    </tfoot>
+  </table>
+  <% hash = {} %>
+  <% if @household_account_book.variable_cost.present? %>
+    <% hash["#{@household_account_book.variable_cost}"] = @total_cost %>
+  <% end %>
+  <% if @household_account_book.variable_cost_1.present? %>
+    <% hash["#{@household_account_book.variable_cost_1}"] = @total_cost_1 %>
+  <% end %>
+  <% if @household_account_book.variable_cost_2.present? %>
+    <% hash["#{@household_account_book.variable_cost_2}"] = @total_cost_2 %>
+  <% end %>
+  <% if @household_account_book.variable_cost_3.present? %>
+    <% hash["#{@household_account_book.variable_cost_3}"] = @total_cost_3 %>
+  <% end %>
+  <% if @household_account_book.variable_cost_4.present? %>
+    <% hash["#{@household_account_book.variable_cost_4}"] = @total_cost_4 %>
+  <% end %>
+  <% if @household_account_book.variable_cost_5.present? %>
+    <% hash["#{@household_account_book.variable_cost_5}"] = @total_cost_5 %>
+  <% end %>
+  <% if @household_account_book.variable_cost_6.present? %>
+    <% hash["#{@household_account_book.variable_cost_6}"] = @total_cost_6 %>
+  <% end %>
+  <% if @household_account_book.variable_cost_7.present? %>
+    <% hash["#{@household_account_book.variable_cost_7}"] = @total_cost_7 %>
+  <% end %>
+  <% if @household_account_book.variable_cost_8.present? %>
+    <% hash["#{@household_account_book.variable_cost_8}"] = @total_cost_8 %>
+  <% end %>
+  <% if @household_account_book.variable_cost_9.present? %>
+    <% hash["#{@household_account_book.variable_cost_9}"] = @total_cost_9 %>
+  <% end %>
+  <% if @household_account_book.variable_cost_10.present? %>
+    <% hash["#{@household_account_book.variable_cost_10}"] = @total_cost_10 %>
+  <% end %>
+  <% if @household_account_book.variable_cost_11.present? %>
+    <% hash["#{@household_account_book.variable_cost_11}"] = @total_cost_11 %>
+  <% end %>
+  <% if @household_account_book.variable_cost_12.present? %>
+    <% hash["#{@household_account_book.variable_cost_12}"] = @total_cost_12 %>
+  <% end %>
+  <% if @household_account_book.variable_cost_13.present? %>
+    <% hash["#{@household_account_book.variable_cost_13}"] = @total_cost_13 %>
+  <% end %>
+  <% if @household_account_book.variable_cost_14.present? %>
+    <% hash["#{@household_account_book.variable_cost_14}"] = @total_cost_14 %>
+  <% end %>
+  <% if @household_account_book.variable_cost_15.present? %>
+    <% hash["#{@household_account_book.variable_cost_15}"] = @total_cost_15 %>
+  <% end %>
+  <% if @household_account_book.variable_cost.present? %>
+    <%= pie_chart hash %>
+  <% end %>
+</div>

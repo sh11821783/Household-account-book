@@ -1,0 +1,49 @@
+<% provide(:title, @user.name) %>
+<%= form_with(model: @user, url: household_account_books_update_one_month_2_user_path(date: @first_day), local: true, method: :patch) do |f| %>
+<div>
+  <h1>家計簿記載画面【収入】</h1>
+  <table class="table table-bordered table-condensed table-hover" id="table-attendances">
+    <% n = 0 %>
+    <% @household_account_books.each do |household_account_book| %>
+      <%= f.fields_for "household_account_books[]", household_account_book do |h| %>
+        <% if n == 0 %>
+          <thead>
+            <tr>
+              <th>日付</th>
+              <th>曜日</th>
+              <th><%= h.select :income, [['夫（給与）'], ['妻（給与）'], ['給与'], ['臨時収入']], { include_blank: true, selected: @household_accounnt_book.income }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :income_1, [['夫（給与）'], ['妻（給与）'], ['給与'], ['臨時収入']], { include_blank: true, selected: @household_accounnt_book.income_1 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :income_2, [['夫（給与）'], ['妻（給与）'], ['給与'], ['臨時収入']], { include_blank: true, selected: @household_accounnt_book.income_2 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :income_3, [['夫（給与）'], ['妻（給与）'], ['給与'], ['臨時収入']], { include_blank: true, selected: @household_accounnt_book.income_3 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :income_4, [['夫（給与）'], ['妻（給与）'], ['給与'], ['臨時収入']], { include_blank: true, selected: @household_accounnt_book.income_4 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :income_5, [['夫（給与）'], ['妻（給与）'], ['給与'], ['臨時収入']], { include_blank: true, selected: @household_accounnt_book.income_5 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th>備考</th>
+            </tr>
+          </thead>
+          <% n = 1 %>
+        <% end %>
+      
+      
+        <tbody>
+          <tr>
+            <td><%= l(household_account_book.worked_on, format: :short) %></td>
+            <td><%= $days_of_the_week[household_account_book.worked_on.wday] %></td>
+            <td><%= h.number_field :income_n, class: "form-control" %></td>
+            <td><%= h.number_field :income_n_1, class: "form-control" %></td>
+            <td><%= h.number_field :income_n_2, class: "form-control" %></td>
+            <td><%= h.number_field :income_n_3, class: "form-control" %></td>
+            <td><%= h.number_field :income_n_4, class: "form-control" %></td>
+            <td><%= h.number_field :income_n_5, class: "form-control" %></td>
+            <td><%= h.text_field :income_note %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    <% end %>
+  </table>
+</div>
+
+<div class="center">
+    <%= f.submit "まとめて更新", class: "btn btn-lg btn-primary" %>
+    <%= link_to "キャンセル", show_2_user_url(date: @first_day), class: "btn btn-lg btn-default" %>
+  </div>
+<% end %>

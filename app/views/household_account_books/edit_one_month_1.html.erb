@@ -1,0 +1,69 @@
+<% provide(:title, @user.name) %>
+<%= form_with(model: @user, url: household_account_books_update_one_month_1_user_path(date: @first_day), local: true, method: :patch) do |f| %>
+<div>
+  <h1>家計簿記載画面【変動費】</h1>
+  <table class="table table-bordered table-condensed table-hover" id="table-attendances">
+    <% n = 0 %>
+    <% @household_account_books.each do |household_account_book| %>
+      <%= f.fields_for "household_account_books[]", household_account_book do |h| %>
+        <% if n == 0 %>
+          <thead>
+            <tr>
+              <th>日付</th>
+              <th>曜日</th>
+              <th><%= h.select :variable_cost, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :variable_cost_1, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost_1 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :variable_cost_2, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost_2 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :variable_cost_3, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost_3 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :variable_cost_4, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost_4 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :variable_cost_5, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost_5 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :variable_cost_6, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost_6 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :variable_cost_7, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost_7 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :variable_cost_8, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost_8 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :variable_cost_9, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost_9 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :variable_cost_10, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost_10 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :variable_cost_11, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost_11 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :variable_cost_12, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost_12 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :variable_cost_13, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost_13 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :variable_cost_14, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost_14 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th><%= h.select :variable_cost_15, [['食費（外食）'], ['食費（材料費）'], ['日用品'], ['被服費'], ['美容費'], ['交際費'], ['趣味'], ['交通費'], ['教育費'], ['医療費'], ['特別費(冠婚葬祭・お祝い等)'], ['雑費'] ], { include_blank: true, selected: @household_accounnt_book.variable_cost_15 }, { id: "household_account_book", class: "household_account_book_class" } %></th>
+              <th>備考</th>
+            </tr>
+          </thead>
+          <% n = 1 %>
+        <% end %>
+      
+      
+        <tbody>
+          <tr>
+            <td><%= l(household_account_book.worked_on, format: :short) %></td>
+            <td><%= $days_of_the_week[household_account_book.worked_on.wday] %></td>
+            <td><%= h.number_field :variable_n, class: "form-control" %></td>
+            <td><%= h.number_field :variable_n_1, class: "form-control" %></td>
+            <td><%= h.number_field :variable_n_2, class: "form-control" %></td>
+            <td><%= h.number_field :variable_n_3, class: "form-control" %></td>
+            <td><%= h.number_field :variable_n_4, class: "form-control" %></td>
+            <td><%= h.number_field :variable_n_5, class: "form-control" %></td>
+            <td><%= h.number_field :variable_n_6, class: "form-control" %></td>
+            <td><%= h.number_field :variable_n_7, class: "form-control" %></td>
+            <td><%= h.number_field :variable_n_8, class: "form-control" %></td>
+            <td><%= h.number_field :variable_n_9, class: "form-control" %></td>
+            <td><%= h.number_field :variable_n_10, class: "form-control" %></td>
+            <td><%= h.number_field :variable_n_11, class: "form-control" %></td>
+            <td><%= h.number_field :variable_n_12, class: "form-control" %></td>
+            <td><%= h.number_field :variable_n_13, class: "form-control" %></td>
+            <td><%= h.number_field :variable_n_14, class: "form-control" %></td>
+            <td><%= h.number_field :variable_n_15, class: "form-control" %></td>
+            <td><%= h.text_field :variable_note %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    <% end %>
+  </table>
+</div>
+
+<div class="center">
+    <%= f.submit "まとめて更新", class: "btn btn-lg btn-primary" %>
+    <%= link_to "キャンセル", show_1_user_url(date: @first_day), class: "btn btn-lg btn-default" %>
+  </div>
+<% end %>

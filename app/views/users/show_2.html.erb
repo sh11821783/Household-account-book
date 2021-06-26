@@ -1,0 +1,252 @@
+<% provide(:title, @user.name) %>
+<div>
+  <table class="table table-bordered table-condensed user-table">
+    <tr>
+      <td>名前：<%= @user.name %></td>
+    </tr>
+  </table>
+</div>
+
+<h1>【収入一覧表】</h1>
+
+<div>
+  <table class="table table-bordered table-condensed" id="table-attendances">
+    <tr>
+      <td>
+        <%= l(Date.today, format: :long) %>
+      </td>
+    </tr>
+  <table>
+</div>
+
+<div>
+  <% @household_account_books.each do |h| %>
+    <% @all_total_income = @all_total_income.to_i + h.income_n.to_i + h.income_n_1.to_i + h.income_n_2.to_i + h.income_n_3.to_i +  h.income_n_4.to_i + h.income_n_5.to_i
+      + h.income_n_6.to_i + h.income_n_7.to_i + h.income_n_8.to_i + h.income_n_9.to_i + h.income_n_10.to_i %>
+
+    <% @all_total_cost = @all_total_cost.to_i + h.fixed_n.to_i + h.fixed_n_1.to_i +  h.fixed_n_2.to_i +  h.fixed_n_3.to_i +  h.fixed_n_4.to_i +  h.fixed_n_5.to_i + 
+                           h.fixed_n_6.to_i +  h.fixed_n_7.to_i +  h.fixed_n_8.to_i +  h.fixed_n_9.to_i +  h.fixed_n_10.to_i +  h.fixed_n_11.to_i + 
+                           h.fixed_n_12.to_i +  h.fixed_n_13.to_i +  h.fixed_n_14.to_i +  h.fixed_n_15.to_i %>
+
+    <% @all_total_cost_1 = @all_total_cost_1.to_i + h.variable_n.to_i + h.variable_n_1.to_i + h.variable_n_2.to_i + h.variable_n_3.to_i +  h.variable_n_4.to_i + h.variable_n_5.to_i
+      + h.variable_n_6.to_i + h.variable_n_7.to_i + h.variable_n_8.to_i + h.variable_n_9.to_i + h.income_n_10.to_i %>
+  <% end %>
+  <table class="table table-bordered table-condensed" id="table-attendances">
+    <tr>
+      <th>収入</th>
+      <th>支出（固定費 + 変動費）</th>
+      <th>収支合計</th>
+    </tr>
+    <tr>
+      <td><%= "#{@all_total_income.to_s(:delimited)}円" %></td>
+      <td><%= "#{(@all_total_cost + @all_total_cost_1).to_s(:delimited)}円" "（#{@all_total_cost.to_s(:delimited)}円 + #{@all_total_cost_1.to_s(:delimited)}円）" %></td>
+      <td><%= "#{(@all_total_income.to_i - (@all_total_cost + @all_total_cost_1).to_i).to_s(:delimited)}円" %></td>
+    </tr>
+  <table>
+</div>
+
+<div class="center">
+  <%= form_with(url: user_path(@user), method: :get, local: true) do |f| %>
+    <%= f.date_select :select_year, {:discard_day => true, :discard_month => true, :use_month_numbers => true}, class: "form-control bootstrap-date" %>
+    <%= f.date_select :select_month, {:discard_day => true, :discard_year => true, :use_month_numbers => true}, class: "form-control bootstrap-date" %>
+    <button class="btn btn-primary"> 検索 </button><br><br>
+  <% end %>
+</div>
+
+<div class="center">
+  <%= link_to "⇦ 前月へ", show_2_user_path(date: @first_day.prev_month), class: "btn btn-info" %>
+  <%= link_to "1ヶ月の家計簿編集へ", household_account_books_edit_one_month_2_user_path(date: @first_day), class: "btn btn-success" %>
+  <%= link_to "次月へ ⇨", show_2_user_path(date: @first_day.next_month), class: "btn btn-info" %>
+</div>
+
+<div>
+  <table class="table table-bordered table-condensed table-hover" id="table-attendances">
+    <thead>
+      <br><td colspan = "19"><%= l(@household_account_book.worked_on, format: :year) %></td>
+      <tr>
+        <th>日付</th>
+        <th>曜日</th>
+        <% if @household_account_book.income.present? %>
+          <th><%= @household_account_book.income %></th>
+        <% end %>
+        <% if @household_account_book.income_1.present? %>
+          <th><%= @household_account_book.income_1 %></th>
+        <% end %>
+        <% if @household_account_book.income_2.present? %>
+          <th><%= @household_account_book.income_2 %></th>
+        <% end %>
+        <% if @household_account_book.income_3.present? %>
+          <th><%= @household_account_book.income_3 %></th>
+        <% end %>
+        <% if @household_account_book.income_4.present? %>
+          <th><%= @household_account_book.income_4 %></th>
+        <% end %>
+        <% if @household_account_book.income_5.present? %>
+          <th><%= @household_account_book.income_5 %></th>
+        <% end %>
+        <% if @household_account_book.income_6.present? %>
+          <th><%= @household_account_book.income_6 %></th>
+        <% end %>
+        <% if @household_account_book.income_7.present? %>
+          <th><%= @household_account_book.income_7 %></th>
+        <% end %>
+        <% if @household_account_book.income_8.present? %>
+          <th><%= @household_account_book.income_8 %></th>
+        <% end %>
+        <% if @household_account_book.income_9.present? %>
+          <th><%= @household_account_book.income_9 %></th>
+        <% end %>
+        <% if @household_account_book.income_10.present? %>
+          <th><%= @household_account_book.income_10 %></th>
+        <% end %>
+        <th>備考</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!--この@household_account_booksは、application.html.erbのset_one_monthに定義されている-->
+      <% @household_account_books.each do |household_account_book| %>
+        <tr>
+          <td><%= l(household_account_book.worked_on, format: :short) %></td>
+          <td><%= $days_of_the_week[household_account_book.worked_on.wday] %></td>
+          <% if @household_account_book.income.present? %>
+            <td><%= household_account_book.income_n %></td>
+            <!--１回目の”each”で『@total_income.to_i（0）+ household_account_book.income_n.to_i（1000円）』が入るとすると
+                ２回目の”each”では『@total_income.to_i（1000円）+ household_account_book.income_n.to_i（1000円）』になるようにする。-->
+            <% @total_income = @total_income.to_i  + household_account_book.income_n.to_i %>
+          <% end %>
+          <% if @household_account_book.income_1.present? %>
+            <td><%= household_account_book.income_n_1 %></td>
+            <% @total_income_1 = @total_income_1.to_i  + household_account_book.income_n_1.to_i %>
+          <% end %>
+          <% if @household_account_book.income_2.present? %>
+            <td><%= household_account_book.income_n_2 %></td>
+            <% @total_income_2 = @total_income_2.to_i  + household_account_book.income_n_2.to_i %>
+          <% end %>
+          <% if @household_account_book.income_3.present? %>
+            <td><%= household_account_book.income_n_3 %></td>
+            <% @total_income_3 = @total_income_3.to_i  + household_account_book.income_n_3.to_i %>
+          <% end %>
+          <% if @household_account_book.income_4.present? %>
+            <td><%= household_account_book.income_n_4 %></td>
+            <% @total_income_4 = @total_income_4.to_i  + household_account_book.income_n_4.to_i %>
+          <% end %>
+          <% if @household_account_book.income_5.present? %>
+            <td><%= household_account_book.income_n_5 %></td>
+            <% @total_income_5 = @total_income_5.to_i  + household_account_book.income_n_5.to_i %>
+          <% end %>
+          <% if @household_account_book.income_6.present? %>
+            <td><%= household_account_book.income_n_6 %></td>
+            <% @total_income_6 = @total_income_6.to_i  + household_account_book.income_n_6.to_i %>
+          <% end %>
+          <% if @household_account_book.income_7.present? %>
+            <td><%= household_account_book.income_n_7 %></td>
+            <% @total_income_7 = @total_income_7.to_i  + household_account_book.income_n_7.to_i %>
+          <% end %>
+          <% if @household_account_book.income_8.present? %>
+            <td><%= household_account_book.income_n_8 %></td>
+            <% @total_income_8 = @total_income_8.to_i  + household_account_book.income_n_8.to_i %>
+          <% end %>
+          <% if @household_account_book.income_9.present? %>
+            <td><%= household_account_book.income_n_9 %></td>
+            <% @total_income_9 = @total_income_9.to_i  + household_account_book.income_n_9.to_i %>
+          <% end %>
+          <% if @household_account_book.income_10.present? %>
+            <td><%= household_account_book.income_n_10 %></td>
+            <% @total_income_10 = @total_income_10.to_i  + household_account_book.income_n_10.to_i %>
+          <% end %>
+          <td><%= household_account_book.income_note %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div>
+  <table class="table table-bordered table-condensed table-hover" id="table-attendances">
+    <tfoot>
+    <tr>
+      <% if @household_account_book.income.present? %>
+        <td></td>
+      <% end %>
+      <% if @household_account_book.income.present? %>
+        <td><%= @household_account_book.income %></td>
+      <% end %>
+      <% if @household_account_book.income_1.present? %>
+        <td><%= @household_account_book.income_1 %></td>
+      <% end %>
+      <% if @household_account_book.income_2.present? %>
+        <td><%= @household_account_book.income_2 %></td>
+      <% end %>
+      <% if @household_account_book.income_3.present? %>
+        <td><%= @household_account_book.income_3 %></td>
+      <% end %>
+      <% if @household_account_book.income_4.present? %>
+        <td><%= @household_account_book.income_4 %></td>
+      <% end %>
+      <% if @household_account_book.income_5.present? %>
+        <td><%= @household_account_book.income_5 %></td>
+      <% end %>
+      <% if @household_account_book.income_6.present? %>
+        <td><%= @household_account_book.income_6 %></td>
+      <% end %>
+      <% if @household_account_book.income_7.present? %>
+        <td><%= @household_account_book.income_7 %></td>
+      <% end %>
+      <% if @household_account_book.income_8.present? %>
+        <td><%= @household_account_book.income_8 %></td>
+      <% end %>
+      <% if @household_account_book.income_9.present? %>
+        <td><%= @household_account_book.income_9 %></td>
+      <% end %>
+      <% if @household_account_book.income_10.present? %>
+        <td><%= @household_account_book.income_10 %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td><%= "各収入" %></td>
+      <% if @household_account_book.income.present? %>
+        <td><%= "#{@total_income.to_s(:delimited)}円" %></td>
+      <% elsif @household_account_book.income.blank? %>
+        <td><%= "#{@total_income.to_i}円" %></td>
+      <% end %>
+      <% if @household_account_book.income_1.present? %>
+        <td><%= "#{@total_income_1.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.income_2.present? %>
+        <td><%= "#{@total_income_2.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.income_3.present? %>
+        <td><%= "#{@total_income_3.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.income_4.present? %>
+        <td><%= "#{@total_income_4.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.income_5.present? %>
+        <td><%= "#{@total_income_5.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.income_6.present? %>
+        <td><%= "#{@total_income_6.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.income_7.present? %>
+        <td><%= "#{@total_income_7.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.income_8.present? %>
+        <td><%= "#{@total_income_8.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.income_9.present? %>
+        <td><%= "#{@total_income_9.to_s(:delimited)}円" %></td>
+      <% end %>
+      <% if @household_account_book.income_10.present? %>
+        <td><%= "#{@total_income_10.to_s(:delimited)}円" %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td><%= "収入合計" %></td>
+      <% @all_total_income = @total_income.to_i + @total_income_1.to_i + @total_income_2.to_i + @total_income_3.to_i + @total_income_4.to_i + @total_income_5.to_i + 
+                          @total_income_6.to_i + @total_income_7.to_i + @total_income_8.to_i + @total_income_9.to_i + @total_income_10.to_i + @total_income_11.to_i + 
+                          @total_income_12.to_i + @total_income_13.to_i + @total_income_14.to_i + @total_income_15.to_i %>
+      <td><%= "#{@all_total_income.to_s(:delimited)}円" %></td>
+    </tr>
+    </tfoot>
+  </table>
+</div>
